@@ -5,8 +5,193 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SdComPortViewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="BSS adjuster 2" Height="852" Width="1599" MinWidth="498" MinHeight="500">
     <Grid>
-        
+        <Grid.Background>
+            <SolidColorBrush Color="{DynamicResource Color2}"/>
+        </Grid.Background>
+        <Label x:Name="label_current_time" Content="00:00:00" Margin="0,-2,34,0" FontFamily="Consolas" FontSize="20" HorizontalAlignment="Right" Width="99" Height="40" VerticalAlignment="Top">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+            <Label.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </Label.Foreground>
+        </Label>
+        <Button x:Name="button_logs_start" Content="Start" HorizontalAlignment="Left" Margin="1258,0,0,10" VerticalAlignment="Bottom" Width="75" Click="button_logs_start_Click_1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <GroupBox x:Name="groupBoxUart" Header="UART" Height="160" Margin="0,25,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+            <GroupBox.Effect>
+                <DropShadowEffect/>
+            </GroupBox.Effect>
+            <GroupBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </GroupBox.Foreground>
+            <Grid>
+                <Button x:Name="button_uart_settings" Content="Uart settings" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
+                <Button x:Name="button_rescan" Content="Rescan" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_1"/>
+                <ComboBox x:Name="comboBox_uart_ports" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="87" SelectionChanged="comboBox_uart_ports_SelectionChanged"/>
+                <Button x:Name="button_listen" Content="Listen" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Width="87" Click="button_listen_Click"/>
+                <Button x:Name="button_stop_listen" Content="Stop listen" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="87" IsEnabled="False" Click="button_stop_listen_Click"/>
+
+            </Grid>
+        </GroupBox>
+        <!---<GridSplitter HorizontalAlignment="Left" Height="100" Margin="1690,185,-134,0" VerticalAlignment="Top" Width="5"/> -->
+        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,186,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+            <GroupBox.Effect>
+                <DropShadowEffect Opacity="0.5"/>
+            </GroupBox.Effect>
+            <GroupBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </GroupBox.Foreground>
+            <Grid>
+                <ComboBox x:Name="comboBox_font_style" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="83" SelectedIndex="0" SelectionChanged="comboBox_font_style_SelectionChanged">
+                    <TextBlock>Regular</TextBlock>
+                    <TextBlock>Bold</TextBlock>
+                </ComboBox>
+                <ComboBox x:Name="comboBox_font_size" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="83" RenderTransformOrigin="0.52,-0.045" SelectionChanged="comboBox_font_size_SelectionChanged" SelectedIndex="6">
+                    <TextBlock>6</TextBlock>
+                    <TextBlock>7</TextBlock>
+                    <TextBlock>8</TextBlock>
+                    <TextBlock>9</TextBlock>
+                    <TextBlock>10</TextBlock>
+                    <TextBlock>11</TextBlock>
+                    <TextBlock>12</TextBlock>
+                    <TextBlock>13</TextBlock>
+                    <TextBlock>14</TextBlock>
+                    <TextBlock>15</TextBlock>
+                    <TextBlock>16</TextBlock>
+                    <TextBlock>18</TextBlock>
+                    <TextBlock>20</TextBlock>
+                </ComboBox>
+                <Button x:Name="button_add_hex" Content="Add HEX" HorizontalAlignment="Left" Margin="10,174,0,0" VerticalAlignment="Top" Width="83" Click="button_add_hex_Click"/>
+                <Button x:Name="button_clean" Content="Clean" HorizontalAlignment="Left" Margin="10,199,0,0" VerticalAlignment="Top" Width="83" Click="button_clean_Click"/>
+                <Button x:Name="button_t1" Content="T1" HorizontalAlignment="Left" Margin="14,7,0,0" VerticalAlignment="Top" Width="35" Click="Button_Click_T1" Height="35" Background="#FF202020" Foreground="#FF00C800" FontWeight="Bold" FontSize="16" FontFamily="Consolas"/>
+                <Button x:Name="button_t2" Content="T2" HorizontalAlignment="Left" Margin="54,7,0,0" VerticalAlignment="Top" Width="35" Click="Button_Click_T2" Height="35" FontWeight="Bold" FontSize="16" FontFamily="Consolas"/>
+                <Button x:Name="button_t3" Content="T3" HorizontalAlignment="Left" Margin="14,48,0,0" VerticalAlignment="Top" Width="35" Click="Button_Click_T3" Height="35" Background="LightPink" FontWeight="Bold" FontSize="16" FontFamily="Consolas"/>
+                <Button x:Name="button_t4" Content="T4" HorizontalAlignment="Left" Margin="54,48,0,0" VerticalAlignment="Top" Width="35" Click="Button_Click_T4" Height="35" Background="White" FontWeight="Bold" FontSize="16" FontFamily="Consolas"/>
+                <Label Content="Font size" HorizontalAlignment="Left" Margin="10,83,0,0" VerticalAlignment="Top" Width="75" Height="22" FontFamily="Consolas">
+                    <Label.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Color1}"/>
+                    </Label.Foreground>
+                </Label>
+                <Label Content="Font style" HorizontalAlignment="Left" Margin="10,125,0,0" VerticalAlignment="Top" Width="75" Height="22" FontFamily="Consolas">
+                    <Label.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Color1}"/>
+                    </Label.Foreground>
+                </Label>
+                <CheckBox x:Name="checkBox_autoscroll" Content="Autoscroll" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="16,223,16,0" IsChecked="True">
+                    <CheckBox.Foreground>
+                        <SolidColorBrush Color="{DynamicResource Color1}"/>
+                    </CheckBox.Foreground>
+                </CheckBox>
+            </Grid>
+        </GroupBox>
+        <!---<GroupBox Header="BSS Settings" Height="307" Margin="0,452,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right"> -->
+        <TextBox x:Name="textBox_command" HorizontalAlignment="Left" Height="23" Margin="66,0,0,8" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="500">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label x:Name="label_command" Content="Command" HorizontalAlignment="Left" Margin="10,0,0,6" VerticalAlignment="Bottom" FontFamily="Consolas" Height="26">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+            <Label.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </Label.Foreground>
+        </Label>
+        <CheckBox x:Name="checkBox_hex_command" Content="Hex" HorizontalAlignment="Left" Margin="571,0,0,12" VerticalAlignment="Bottom">
+            <CheckBox.Effect>
+                <DropShadowEffect/>
+            </CheckBox.Effect>
+            <CheckBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </CheckBox.Foreground>
+        </CheckBox>
+        <Button x:Name="button_send_command" Content="Send" HorizontalAlignment="Left" Margin="616,0,0,9" VerticalAlignment="Bottom" Width="75" IsEnabled="False" Click="button_send_command_Click">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <Label x:Name="label_logs_path" Content="Logs path" HorizontalAlignment="Left" Margin="697,0,0,7" VerticalAlignment="Bottom" FontFamily="Consolas">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+            <Label.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </Label.Foreground>
+        </Label>
+        <TextBox x:Name="textBox_logs_path" HorizontalAlignment="Left" Height="23" Margin="766,0,0,8" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="424">
+            <TextBox.Effect>
+                <DropShadowEffect/>
+            </TextBox.Effect>
+        </TextBox>
+        <ComboBox x:Name="comboBox_logs_path" HorizontalAlignment="Left" Margin="1193,0,0,9" VerticalAlignment="Bottom" Width="60" SelectionChanged="comboBox_logs_path_SelectionChanged" SelectedIndex="0">
+            <ComboBox.Effect>
+                <DropShadowEffect/>
+            </ComboBox.Effect>
+            <TextBlock>Data</TextBlock>
+            <TextBlock>Hex</TextBlock>
+            <TextBlock>ASCII</TextBlock>
+        </ComboBox>
+        <Button x:Name="button_browse" Content="Browse" HorizontalAlignment="Left" Margin="1338,0,0,10" VerticalAlignment="Bottom" Width="75" Click="button_browse_Click_1">
+            <Button.Effect>
+                <DropShadowEffect/>
+            </Button.Effect>
+        </Button>
+        <TextBox x:Name="text_box_main_1" Margin="5,10,154,45" TextWrapping="Wrap"  Text="" VerticalScrollBarVisibility="Visible" FontFamily="Consolas">
+            <TextBox.Background>
+                <SolidColorBrush Color="{DynamicResource Color3}"/>
+            </TextBox.Background>
+            <TextBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color4}"/>
+            </TextBox.Foreground>
+        </TextBox>
+        <Grid x:Name="MainTextBoxesGrid" Margin="0,0,154,40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="text_box_main_2" TextWrapping="Wrap" Text="" SelectionBrush="Black" Panel.ZIndex="1" VerticalScrollBarVisibility="Visible" FontFamily="Consolas" Margin="5,10,4,5">
+                <TextBox.Background>
+                    <SolidColorBrush Color="{DynamicResource Color3}"/>
+                </TextBox.Background>
+                <TextBox.Foreground>
+                    <SolidColorBrush Color="{DynamicResource Color4}"/>
+                </TextBox.Foreground>
+            </TextBox>
+            <GridSplitter x:Name="GridSplitter_m2_m3" Grid.Column="1" Width="2" HorizontalAlignment="Stretch" Margin="0,10,0,5" Visibility="Hidden" />
+            <TextBox x:Name="text_box_main_3" Grid.Column="2"  Margin="5,10,0,5" TextWrapping="Wrap" Text="" SelectionBrush="Black" VerticalScrollBarVisibility="Visible" FontFamily="Consolas" >
+                <TextBox.Background>
+                    <SolidColorBrush Color="{DynamicResource Color3}"/>
+                </TextBox.Background>
+                <TextBox.Foreground>
+                    <SolidColorBrush Color="{DynamicResource Color4}"/>
+                </TextBox.Foreground>
+            </TextBox>
+
+        </Grid>
+        <Button x:Name="button_folding_right_menu" Content=">" HorizontalAlignment="Right" Margin="0,10,144,45" Width="10" FontWeight="Bold" FontFamily="Consolas" FontSize="13" Click="button_folding_right_menu_Click">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </Button.Foreground>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource Color5}"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="button_folding_down_menu" Content="-----" Margin="5,0,154,35" VerticalAlignment="Bottom" Height="10" FontSize="6" FontFamily="Consolas" FontWeight="Bold" Click="button_folding_down_menu_Click">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </Button.Foreground>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource Color5}"/>
+            </Button.Background>
+        </Button>
+
     </Grid>
 </Window>

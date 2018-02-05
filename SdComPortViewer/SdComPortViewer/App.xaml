@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:SdComPortViewer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <Color x:Key="Color1">White</Color>
+        <Color x:Key="Color2">#FF404040</Color>
+        <Color x:Key="Color3">#FF202020</Color>
+        <Color x:Key="Color4">#FF00DC00</Color>
+
     </Application.Resources>
 </Application>

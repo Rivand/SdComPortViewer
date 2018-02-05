@@ -1,0 +1,32 @@
+﻿<Window x:Class="SdComPortViewer.UartSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SdComPortViewer"
+        mc:Ignorable="d"
+        Title="uart_config" Height="300" Width="300">
+    <Grid>
+        <Label Content="Baud rate" HorizontalAlignment="Left" Margin="54,62,0,0" VerticalAlignment="Top"/>
+        <Label Content="Parity" HorizontalAlignment="Left" Margin="54,94,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.256,-0.385"/>
+        <Label Content="Data bits" HorizontalAlignment="Left" Margin="54,125,0,0" VerticalAlignment="Top"/>
+        <Label Content="Stop bits" HorizontalAlignment="Left" Margin="58,156,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox_baud_rate" HorizontalAlignment="Left" Height="23" Margin="120,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_data_bits" HorizontalAlignment="Left" Height="23" Margin="120,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox_parity" HorizontalAlignment="Left" Margin="120,98,0,0" VerticalAlignment="Top" Width="120">
+            <TextBlock>None</TextBlock>
+            <TextBlock>Odd</TextBlock>
+            <TextBlock>Even</TextBlock>
+            <TextBlock>Mark</TextBlock>
+            <TextBlock>Space</TextBlock>
+        </ComboBox>
+        <ComboBox x:Name="comboBox_stop_bits" HorizontalAlignment="Left" Margin="120,160,0,0" VerticalAlignment="Top" Width="120">
+            <TextBlock>None</TextBlock>
+            <TextBlock>One</TextBlock>
+            <TextBlock>Two</TextBlock>
+            <TextBlock>OnePointFive</TextBlock>
+        </ComboBox>
+        <Button x:Name="button_uart_settings_ok" Content="Ok" HorizontalAlignment="Left" Margin="57,220,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="2.093,1.5" Click="button_uart_settings_ok_Click"/>
+        <Button x:Name="button_uart_settings_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="172,220,0,0" VerticalAlignment="Top" Width="75" Click="button_uart_settings_cancel_Click"/>
+    </Grid>
+</Window>
