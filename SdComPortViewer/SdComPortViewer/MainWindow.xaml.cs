@@ -45,7 +45,6 @@ namespace SdComPortViewer
             text_box_main_2.Visibility = Visibility.Hidden;
             text_box_main_3.Visibility = Visibility.Hidden;
 
-            if (CurrentAppState.CurrentAppConfig.LogsPathsDataIsListen) CurrentAppState.LogsDataStream = new StreamWriter(CurrentAppState.CurrentAppConfig.LogsPathsData, true, System.Text.Encoding.Default);
             if (CurrentAppState.CurrentAppConfig.LogsPathsHexIsListen) CurrentAppState.LogsHexStream = new StreamWriter(CurrentAppState.CurrentAppConfig.LogsPathsHex, true, System.Text.Encoding.Default);
             if (CurrentAppState.CurrentAppConfig.LogsPathsAsciiIsListen) CurrentAppState.LogsAsciiStream = new StreamWriter(CurrentAppState.CurrentAppConfig.LogsPathsAscii, true, System.Text.Encoding.Default);
 
@@ -118,20 +117,19 @@ namespace SdComPortViewer
             Thread.Sleep(100);
             //string data = sp.ReadExisting();
             //listBox_COM.Invoke(new Action(() => listBox_COM.Items.Add(data)));
-            byte[] listenerData = new byte[Uart.UartPort.BytesToRead + 10];
+            byte[] listenerData = new byte[Uart.UartPort.BytesToRead];
             int count = Uart.UartPort.BytesToRead;
             //
             Uart.UartPort.Read(listenerData, 0, Uart.UartPort.BytesToRead); // TODO Вставить обработчик исключения (которое выскакивает если БС не работает)
 
-            string strMessage = listenerData.Aggregate("-", (current, c) => current + (char)c);
+            string strMessage = "";
+            strMessage = listenerData.Aggregate("", (current, c) => current + (char)c);
             string hexMsg = "";
             for (int i = 0; i < count; i++)
             {
                 _uartData.Add(listenerData[i]);
                 if (listenerData[i] < 0X10) hexMsg += "0";
                 hexMsg += listenerData[i].ToString("X") + " ";
-
-                if (listenerData[i] == 0xCA && _lastByte == 0xAA) hexMsg += "\n"; // У нас последовательность AA CA, переходим на следующую строку. 
                 _lastByte = listenerData[i];
 
             }
@@ -140,24 +138,15 @@ namespace SdComPortViewer
 
                 text_box_main_1.AppendText(strMessage);
                 text_box_main_2.AppendText(strMessage);
-
-                if (CurrentAppState.CurrentAppConfig.LogsPathsDataIsListen)
-                {
-                    CurrentAppState.LogsDataStream.Write(strMessage);
-                    CurrentAppState.LogsDataStream.Flush();
-                }
-
-
                 text_box_main_3.AppendText(hexMsg);
                 if (CurrentAppState.CurrentAppConfig.LogsPathsHexIsListen)
                 {
                     CurrentAppState.LogsHexStream.Write(hexMsg);
                     CurrentAppState.LogsHexStream.Flush();
                 }
-
                 if (CurrentAppState.CurrentAppConfig.LogsPathsAsciiIsListen)
                 {
-                    foreach (var c in listenerData) CurrentAppState.LogsAsciiStream.Write((char)c);
+                    CurrentAppState.LogsAsciiStream.Write(strMessage);
                     CurrentAppState.LogsAsciiStream.Flush();
                 }
             }));
@@ -381,14 +370,10 @@ namespace SdComPortViewer
             switch (comboBox_logs_path.SelectedIndex)
             {
                 case 0:
-                    CurrentAppState.CurrentAppConfig.LogsPathsData = openFileDialog.FileName;
-                    textBox_logs_path.Text = CurrentAppState.CurrentAppConfig.LogsPathsData;
-                    break;
-                case 1:
                     CurrentAppState.CurrentAppConfig.LogsPathsHex = openFileDialog.FileName;
                     textBox_logs_path.Text = CurrentAppState.CurrentAppConfig.LogsPathsHex;
                     break;
-                case 2:
+                case 1:
                     CurrentAppState.CurrentAppConfig.LogsPathsAscii = openFileDialog.FileName;
                     textBox_logs_path.Text = CurrentAppState.CurrentAppConfig.LogsPathsAscii;
                     break;
@@ -399,30 +384,8 @@ namespace SdComPortViewer
         {
             switch (comboBox_logs_path.SelectedIndex)
             {
-                case 0:
-                    if (CurrentAppState.CurrentAppConfig.LogsPathsDataIsListen == false)
-                    {
-                        try
-                        {
-                            CurrentAppState.CurrentAppConfig.LogsPathsData = textBox_logs_path.Text;
-                            CurrentAppState.LogsDataStream = new StreamWriter(CurrentAppState.CurrentAppConfig.LogsPathsData, true, System.Text.Encoding.Default);
-                            CurrentAppState.CurrentAppConfig.LogsPathsDataIsListen = true;
-                            button_logs_start.Content = "Stop";
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Неудалось открыть файл логирования.");
-                        }
-                    }
-                    else
-                    {
-                        CurrentAppState.CurrentAppConfig.LogsPathsDataIsListen = false;
-                        CurrentAppState.LogsDataStream.Close();
-                        button_logs_start.Content = "Start";
-                    }
 
-                    break;
-                case 1:
+                case 0:
                     if (CurrentAppState.CurrentAppConfig.LogsPathsHexIsListen == false)
                     {
                         try
@@ -445,7 +408,7 @@ namespace SdComPortViewer
                     }
 
                     break;
-                case 2:
+                case 1:
                     if (CurrentAppState.CurrentAppConfig.LogsPathsAsciiIsListen == false)
                     {
                         try
@@ -476,16 +439,11 @@ namespace SdComPortViewer
             switch (comboBox_logs_path.SelectedIndex)
             {
                 case 0:
-                    textBox_logs_path.Text = CurrentAppState.CurrentAppConfig.LogsPathsData;
-                    if (CurrentAppState.CurrentAppConfig.LogsPathsDataIsListen == true) button_logs_start.Content = "Stop";
-                    else button_logs_start.Content = "Start";
-                    break;
-                case 1:
                     textBox_logs_path.Text = CurrentAppState.CurrentAppConfig.LogsPathsHex;
                     if (CurrentAppState.CurrentAppConfig.LogsPathsHexIsListen == true) button_logs_start.Content = "Stop";
                     else button_logs_start.Content = "Start";
                     break;
-                case 2:
+                case 1:
                     textBox_logs_path.Text = CurrentAppState.CurrentAppConfig.LogsPathsAscii;
                     if (CurrentAppState.CurrentAppConfig.LogsPathsAsciiIsListen == true) button_logs_start.Content = "Stop";
                     else button_logs_start.Content = "Start";

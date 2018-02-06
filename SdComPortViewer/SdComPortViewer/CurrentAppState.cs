@@ -24,10 +24,8 @@ namespace SdComPortViewer
         [DataMember] public int ComboBoxFontSizeIndex = 6;
         [DataMember] public FontWeight FontWeights = System.Windows.FontWeights.Normal;
         [DataMember] public int ComboBoxFontStyleIndex = 0;
-        [DataMember] public string LogsPathsData = @"logs_data.txt";
         [DataMember] public string LogsPathsHex = @"logs_hex.txt";
         [DataMember] public string LogsPathsAscii = @"logs_ascii.txt";
-        [DataMember] public bool LogsPathsDataIsListen = false;
         [DataMember] public bool LogsPathsHexIsListen = false;
         [DataMember] public bool LogsPathsAsciiIsListen = false;
         [DataMember] public UartSettings UartSettings = new UartSettings();
@@ -39,7 +37,6 @@ namespace SdComPortViewer
     internal static class CurrentAppState
     {
         public static AppConfig CurrentAppConfig = new AppConfig();
-        public static StreamWriter LogsDataStream;// = new StreamWriter("Logs.txt", true, System.Text.Encoding.Default);
         public static StreamWriter LogsHexStream;
         public static StreamWriter LogsAsciiStream;
         private static MainWindow _mainWindow;

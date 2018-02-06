@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SdComPortViewer"
         mc:Ignorable="d"
-        Title="BSS adjuster 2" Height="852" Width="1599" MinWidth="498" MinHeight="500">
+        Title="Sverdlovsk dynamics com port viewer" Height="852" Width="1599" MinWidth="498" MinHeight="500">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Color2}"/>
@@ -134,7 +134,6 @@
             <ComboBox.Effect>
                 <DropShadowEffect/>
             </ComboBox.Effect>
-            <TextBlock>Data</TextBlock>
             <TextBlock>Hex</TextBlock>
             <TextBlock>ASCII</TextBlock>
         </ComboBox>
