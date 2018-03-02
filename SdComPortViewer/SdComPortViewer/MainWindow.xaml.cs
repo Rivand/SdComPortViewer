@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,9 @@ namespace SdComPortViewer
                 CurrentAppState.CurrentAppConfig.WindowsLocationX = this.Left;
                 CurrentAppState.CurrentAppConfig.WindowsLocationY = this.Top;
                 CurrentAppState.CurrentAppConfig.CheckBoxAutoscrollIsChecked = checkBox_autoscroll.IsChecked;
+
+                CurrentAppState.CurrentAppConfig.TextBoxCommandText = this.textBox_command.Text;
+                CurrentAppState.CurrentAppConfig.CheckBoxHexCommandIsChecked = this.checkBox_hex_command.IsChecked;
 
 
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(AppConfig));
@@ -354,8 +358,23 @@ namespace SdComPortViewer
 
         private void button_send_command_Click(object sender, RoutedEventArgs e)
         {
-            var msg = textBox_command.Text.ToCharArray();
-            Uart.UartPort.Write(msg, 0, msg.Length);
+            if (checkBox_hex_command.IsEnabled)
+            {
+                var bytes = textBox_command.Text.Split(' ').Select(_ => int.Parse(_, NumberStyles.HexNumber));
+
+                int[] int_array = bytes.ToArray();
+                byte[] byte_array = new byte [int_array.Length];
+                for (int i=0; i< int_array.Length;i++ )
+                {
+                    byte_array[i] = (byte)int_array[i];
+                }
+                Uart.UartPort.Write(byte_array, 0, byte_array.Length);
+            }
+            else
+            {
+                var msg = textBox_command.Text.ToCharArray();
+                Uart.UartPort.Write(msg, 0, msg.Length);
+            }
         }
 
         private void button_browse_Click(object sender, RoutedEventArgs e)

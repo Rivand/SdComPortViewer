@@ -10,7 +10,7 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Color2}"/>
         </Grid.Background>
-        <Label x:Name="label_current_time" Content="00:00:00" Margin="0,-2,34,0" FontFamily="Consolas" FontSize="20" HorizontalAlignment="Right" Width="99" Height="40" VerticalAlignment="Top">
+        <Label x:Name="label_current_time" Content="00:00:00" Margin="0,2,34,0" FontFamily="Consolas" FontSize="20" HorizontalAlignment="Right" Width="99" Height="40" VerticalAlignment="Top">
             <Label.Effect>
                 <DropShadowEffect/>
             </Label.Effect>
@@ -23,7 +23,7 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <GroupBox x:Name="groupBoxUart" Header="UART" Height="160" Margin="0,25,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+        <GroupBox x:Name="groupBoxUart" Header="UART" Height="160" Margin="0,39,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
             <GroupBox.Effect>
                 <DropShadowEffect/>
             </GroupBox.Effect>
@@ -40,7 +40,7 @@
             </Grid>
         </GroupBox>
         <!---<GridSplitter HorizontalAlignment="Left" Height="100" Margin="1690,185,-134,0" VerticalAlignment="Top" Width="5"/> -->
-        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,186,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,210,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
             <GroupBox.Effect>
                 <DropShadowEffect Opacity="0.5"/>
             </GroupBox.Effect>

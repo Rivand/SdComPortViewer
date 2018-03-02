@@ -32,6 +32,8 @@ namespace SdComPortViewer
         [DataMember] public bool? CheckBoxAutoscrollIsChecked = true;
         [DataMember] public bool RightMenuIsCollapsed = false;
         [DataMember] public bool DownMenuIsCollapsed = false;
+        [DataMember] public string TextBoxCommandText = "";
+        [DataMember] public bool? CheckBoxHexCommandIsChecked = false;
     }
 
     internal static class CurrentAppState
@@ -65,6 +67,8 @@ namespace SdComPortViewer
                 mainWindow.WindowState = CurrentAppConfig.WindowsState;
                 Uart.CurrentUartSettings = CurrentAppConfig.UartSettings;
                 mainWindow.checkBox_autoscroll.IsChecked = CurrentAppState.CurrentAppConfig.CheckBoxAutoscrollIsChecked;
+                mainWindow.textBox_command.Text = CurrentAppState.CurrentAppConfig.TextBoxCommandText;
+                mainWindow.checkBox_hex_command.IsChecked = CurrentAppState.CurrentAppConfig.CheckBoxHexCommandIsChecked;
 
                 if (CurrentAppConfig.RightMenuIsCollapsed == true) mainWindow.HideRightMenu();
                 if (CurrentAppConfig.DownMenuIsCollapsed == true) mainWindow.HideDownMenu();
