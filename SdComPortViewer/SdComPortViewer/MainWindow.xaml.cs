@@ -559,5 +559,36 @@ namespace SdComPortViewer
                     return;
             }
         }
+
+        private void Button_Click_Dtr(object sender, RoutedEventArgs e)
+        {
+            if (Uart.CurrentUartSettings.DtrEnable) {
+                Uart.CurrentUartSettings.DtrEnable = false;
+                if (Uart.UartPort != null) Uart.UartPort.DtrEnable = Uart.CurrentUartSettings.DtrEnable;
+                button_dtr.Content = "DTR now on";
+            }
+            else
+            {
+                Uart.CurrentUartSettings.DtrEnable = true;
+                if (Uart.UartPort != null) Uart.UartPort.DtrEnable = Uart.CurrentUartSettings.DtrEnable;
+                button_dtr.Content = "DTR now off";
+            }
+        }
+
+        private void Button_Click_Rts(object sender, RoutedEventArgs e)
+        {
+            if (Uart.CurrentUartSettings.RtsEnable)
+            {
+                Uart.CurrentUartSettings.RtsEnable = false;
+                if (Uart.UartPort != null) Uart.UartPort.RtsEnable = Uart.CurrentUartSettings.RtsEnable;
+                button_rts.Content = "RTS now on";
+            }
+            else
+            {
+                Uart.CurrentUartSettings.RtsEnable = true;
+                if (Uart.UartPort != null) Uart.UartPort.RtsEnable = Uart.CurrentUartSettings.RtsEnable;
+                button_rts.Content = "RTS now off";
+            }
+        }
     }
 }

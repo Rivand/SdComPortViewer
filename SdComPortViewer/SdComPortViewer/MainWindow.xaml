@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SdComPortViewer"
         mc:Ignorable="d"
-        Title="Sverdlovsk dynamics com port viewer" Height="852" Width="1599" MinWidth="498" MinHeight="500">
+        Title="Sverdlovsk dynamics com port viewer v 0.0.5" Height="852" Width="1599" MinWidth="498" MinHeight="500">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Color2}"/>
@@ -40,7 +40,7 @@
             </Grid>
         </GroupBox>
         <!---<GridSplitter HorizontalAlignment="Left" Height="100" Margin="1690,185,-134,0" VerticalAlignment="Top" Width="5"/> -->
-        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,210,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,204,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
             <GroupBox.Effect>
                 <DropShadowEffect Opacity="0.5"/>
             </GroupBox.Effect>
@@ -191,6 +191,19 @@
                 <SolidColorBrush Color="{DynamicResource Color5}"/>
             </Button.Background>
         </Button>
+        <GroupBox x:Name="groupBoxUart_DtrRts" Header="DTR and RTS" Height="88" Margin="0,472,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+            <GroupBox.Effect>
+                <DropShadowEffect/>
+            </GroupBox.Effect>
+            <GroupBox.Foreground>
+                <SolidColorBrush Color="{DynamicResource Color1}"/>
+            </GroupBox.Foreground>
+            <Grid>
+                <Button x:Name="button_dtr" Content="DTR on" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_Dtr"/>
+                <Button x:Name="button_rts" Content="RTS off" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_Rts"/>
+
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>

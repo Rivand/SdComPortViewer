@@ -15,6 +15,8 @@ namespace SdComPortViewer
         [DataMember] public StopBits CurrentStopBits = StopBits.One;
         [DataMember] public int CurrentBaudRate = 115200;
         [DataMember] public int DataBits = 8;
+        [DataMember] public bool DtrEnable = false;
+        [DataMember] public bool RtsEnable = false;
     }
 
     internal static class Uart
@@ -25,6 +27,8 @@ namespace SdComPortViewer
         public static void OpenPort(string portName)
         {
             UartPort = new System.IO.Ports.SerialPort(portName, CurrentUartSettings.CurrentBaudRate, CurrentUartSettings.CurrentParity, CurrentUartSettings.DataBits, CurrentUartSettings.CurrentStopBits);
+            UartPort.DtrEnable = CurrentUartSettings.DtrEnable;
+            UartPort.RtsEnable = CurrentUartSettings.RtsEnable;
             UartPort.Open();
         }
 
