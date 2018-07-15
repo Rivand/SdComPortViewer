@@ -66,10 +66,10 @@ namespace SdComPortViewer
                 mainWindow.Height = CurrentAppConfig.WindowsHeight;
                 mainWindow.WindowState = CurrentAppConfig.WindowsState;
                 Uart.CurrentUartSettings = CurrentAppConfig.UartSettings;
-                if (Uart.CurrentUartSettings.DtrEnable) _mainWindow.button_dtr.Content = "DTR now off";
-                else _mainWindow.button_dtr.Content = "DTR now on";
-                if (Uart.CurrentUartSettings.RtsEnable) _mainWindow.button_rts.Content = "RTS now off";
-                else _mainWindow.button_rts.Content = "RTS now on";
+                if (Uart.CurrentUartSettings.DtrEnable) _mainWindow.button_dtr.Content = "DTR now on";
+                else _mainWindow.button_dtr.Content = "DTR now off";
+                if (Uart.CurrentUartSettings.RtsEnable) _mainWindow.button_rts.Content = "RTS now on";
+                else _mainWindow.button_rts.Content = "RTS now off";
                 mainWindow.checkBox_autoscroll.IsChecked = CurrentAppState.CurrentAppConfig.CheckBoxAutoscrollIsChecked;
                 mainWindow.textBox_command.Text = CurrentAppState.CurrentAppConfig.TextBoxCommandText;
                 mainWindow.checkBox_hex_command.IsChecked = CurrentAppState.CurrentAppConfig.CheckBoxHexCommandIsChecked;

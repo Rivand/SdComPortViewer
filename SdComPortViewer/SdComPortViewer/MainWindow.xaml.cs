@@ -482,6 +482,7 @@ namespace SdComPortViewer
             label_current_time.Visibility = Visibility.Hidden;
             groupBoxUart.Visibility = Visibility.Hidden;
             groupBoxStyle.Visibility = Visibility.Hidden;
+            groupBoxUart_DtrRts.Visibility = Visibility.Hidden;
             button_folding_right_menu.Content = "<";
             CurrentAppState.CurrentAppConfig.RightMenuIsCollapsed = true;
         }
@@ -495,6 +496,7 @@ namespace SdComPortViewer
             label_current_time.Visibility = Visibility.Visible;
             groupBoxUart.Visibility = Visibility.Visible;
             groupBoxStyle.Visibility = Visibility.Visible;
+            groupBoxUart_DtrRts.Visibility = Visibility.Visible;
             button_folding_right_menu.Content = ">";
             CurrentAppState.CurrentAppConfig.RightMenuIsCollapsed = false;
         }
@@ -565,13 +567,13 @@ namespace SdComPortViewer
             if (Uart.CurrentUartSettings.DtrEnable) {
                 Uart.CurrentUartSettings.DtrEnable = false;
                 if (Uart.UartPort != null) Uart.UartPort.DtrEnable = Uart.CurrentUartSettings.DtrEnable;
-                button_dtr.Content = "DTR now on";
+                button_dtr.Content = "DTR now off";
             }
             else
             {
                 Uart.CurrentUartSettings.DtrEnable = true;
                 if (Uart.UartPort != null) Uart.UartPort.DtrEnable = Uart.CurrentUartSettings.DtrEnable;
-                button_dtr.Content = "DTR now off";
+                button_dtr.Content = "DTR now on";
             }
         }
 
@@ -581,13 +583,13 @@ namespace SdComPortViewer
             {
                 Uart.CurrentUartSettings.RtsEnable = false;
                 if (Uart.UartPort != null) Uart.UartPort.RtsEnable = Uart.CurrentUartSettings.RtsEnable;
-                button_rts.Content = "RTS now on";
+                button_rts.Content = "RTS now off";
             }
             else
             {
                 Uart.CurrentUartSettings.RtsEnable = true;
                 if (Uart.UartPort != null) Uart.UartPort.RtsEnable = Uart.CurrentUartSettings.RtsEnable;
-                button_rts.Content = "RTS now off";
+                button_rts.Content = "RTS now on";
             }
         }
     }
