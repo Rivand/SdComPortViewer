@@ -358,7 +358,7 @@ namespace SdComPortViewer
 
         private void button_send_command_Click(object sender, RoutedEventArgs e)
         {
-            if (checkBox_hex_command.IsEnabled)
+            if (checkBox_hex_command.IsChecked == true)
             {
                 var bytes = textBox_command.Text.Split(' ').Select(_ => int.Parse(_, NumberStyles.HexNumber));
 
