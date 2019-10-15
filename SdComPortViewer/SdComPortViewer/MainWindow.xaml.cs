@@ -115,52 +115,49 @@ namespace SdComPortViewer
         private byte _lastByte = 0;
         private void GetDataFromComPort(object sender, SerialDataReceivedEventArgs e)
         {
-            //try
-            //{
-            SerialPort sp = (SerialPort)sender;
-            Thread.Sleep(100);
-            //string data = sp.ReadExisting();
-            //listBox_COM.Invoke(new Action(() => listBox_COM.Items.Add(data)));
-            byte[] listenerData = new byte[Uart.UartPort.BytesToRead];
-            int count = Uart.UartPort.BytesToRead;
-            //
-            Uart.UartPort.Read(listenerData, 0, Uart.UartPort.BytesToRead); // TODO Вставить обработчик исключения (которое выскакивает если БС не работает)
-
-            string strMessage = "";
-            strMessage = listenerData.Aggregate("", (current, c) => current + (char)c);
-            string hexMsg = "";
-            for (int i = 0; i < count; i++)
+            try
             {
-                _uartData.Add(listenerData[i]);
-                if (listenerData[i] < 0X10) hexMsg += "0";
-                hexMsg += listenerData[i].ToString("X") + " ";
-                _lastByte = listenerData[i];
+                SerialPort sp = (SerialPort)sender;
+                //Thread.Sleep(100);
+                //string data = sp.ReadExisting();
+                //listBox_COM.Invoke(new Action(() => listBox_COM.Items.Add(data)));
+                int count = Uart.UartPort.BytesToRead;
+                byte[] listenerData = new byte[count];
+                Uart.UartPort.Read(listenerData, 0, count); // TODO Вставить обработчик исключения (которое выскакивает если БС не работает)
+                string strMessage = "";
+                strMessage = listenerData.Aggregate("", (current, c) => current + (char)c);
+                string hexMsg = "";
+                for (int i = 0; i < count; i++)
+                {
+                    _uartData.Add(listenerData[i]);
+                    if (listenerData[i] < 0X10) hexMsg += "0";
+                    hexMsg += listenerData[i].ToString("X") + " ";
+                    _lastByte = listenerData[i];
 
+                }
+                this.Dispatcher.Invoke(new Action(() =>
+                {
+
+                    text_box_main_1.AppendText(strMessage);
+                    text_box_main_2.AppendText(strMessage);
+                    text_box_main_3.AppendText(hexMsg);
+                    if (CurrentAppState.CurrentAppConfig.LogsPathsHexIsListen)
+                    {
+                        CurrentAppState.LogsHexStream.Write(hexMsg);
+                        CurrentAppState.LogsHexStream.Flush();
+                    }
+                    if (CurrentAppState.CurrentAppConfig.LogsPathsAsciiIsListen)
+                    {
+                        CurrentAppState.LogsAsciiStream.Write(strMessage);
+                        CurrentAppState.LogsAsciiStream.Flush();
+                    }
+                }));
             }
-            this.Dispatcher.Invoke(new Action(() =>
+            catch (Exception ex)
             {
-
-                text_box_main_1.AppendText(strMessage);
-                text_box_main_2.AppendText(strMessage);
-                text_box_main_3.AppendText(hexMsg);
-                if (CurrentAppState.CurrentAppConfig.LogsPathsHexIsListen)
-                {
-                    CurrentAppState.LogsHexStream.Write(hexMsg);
-                    CurrentAppState.LogsHexStream.Flush();
-                }
-                if (CurrentAppState.CurrentAppConfig.LogsPathsAsciiIsListen)
-                {
-                    CurrentAppState.LogsAsciiStream.Write(strMessage);
-                    CurrentAppState.LogsAsciiStream.Flush();
-                }
-            }));
-
-
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Исключение в потоке получения данных UART:" + e.ToString());
-            //}
+                //var a = ex as EndOfStreamException;
+                MessageBox.Show("Исключение в потоке получения данных UART: " + ex.Message + "(" + ex.Source + ")");
+            }
         }
 
         public void StartWatch()
@@ -363,8 +360,8 @@ namespace SdComPortViewer
                 var bytes = textBox_command.Text.Split(' ').Select(_ => int.Parse(_, NumberStyles.HexNumber));
 
                 int[] int_array = bytes.ToArray();
-                byte[] byte_array = new byte [int_array.Length];
-                for (int i=0; i< int_array.Length;i++ )
+                byte[] byte_array = new byte[int_array.Length];
+                for (int i = 0; i < int_array.Length; i++)
                 {
                     byte_array[i] = (byte)int_array[i];
                 }
@@ -564,7 +561,8 @@ namespace SdComPortViewer
 
         private void Button_Click_Dtr(object sender, RoutedEventArgs e)
         {
-            if (Uart.CurrentUartSettings.DtrEnable) {
+            if (Uart.CurrentUartSettings.DtrEnable)
+            {
                 Uart.CurrentUartSettings.DtrEnable = false;
                 if (Uart.UartPort != null) Uart.UartPort.DtrEnable = Uart.CurrentUartSettings.DtrEnable;
                 button_dtr.Content = "DTR now off";

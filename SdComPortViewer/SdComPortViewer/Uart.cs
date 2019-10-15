@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.IO.Ports;
-
+using System.Windows;
 namespace SdComPortViewer
 {
     [DataContract]
@@ -24,17 +24,29 @@ namespace SdComPortViewer
         public static SerialPort UartPort;
         public static UartSettings CurrentUartSettings = new UartSettings();
 
-        public static void OpenPort(string portName)
+        public static void OpenPort(string portName) 
         {
-            UartPort = new System.IO.Ports.SerialPort(portName, CurrentUartSettings.CurrentBaudRate, CurrentUartSettings.CurrentParity, CurrentUartSettings.DataBits, CurrentUartSettings.CurrentStopBits);
-            UartPort.DtrEnable = CurrentUartSettings.DtrEnable;
-            UartPort.RtsEnable = CurrentUartSettings.RtsEnable;
-            UartPort.Open();
+            try
+            {
+                UartPort = new System.IO.Ports.SerialPort(portName, CurrentUartSettings.CurrentBaudRate, CurrentUartSettings.CurrentParity, CurrentUartSettings.DataBits, CurrentUartSettings.CurrentStopBits);
+                UartPort.DtrEnable = CurrentUartSettings.DtrEnable;
+                UartPort.RtsEnable = CurrentUartSettings.RtsEnable;
+                UartPort.Open();
+            }
+            catch (Exception ex){
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static void ClosePort()
         {
-            UartPort.Close();
+            try {
+                UartPort.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
