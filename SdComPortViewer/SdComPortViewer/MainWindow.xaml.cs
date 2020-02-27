@@ -51,7 +51,6 @@ namespace SdComPortViewer
 
             this.Closed += (object sender, EventArgs e) =>
             {
-
                 CurrentAppState.CurrentAppConfig.UartSettings = Uart.CurrentUartSettings;
                 CurrentAppState.CurrentAppConfig.WindowsState = this.WindowState;
                 CurrentAppState.CurrentAppConfig.WindowsWeight = this.Width;
@@ -65,9 +64,18 @@ namespace SdComPortViewer
 
 
                 DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(AppConfig));
-                FileStream fileStream = new FileStream("AppConfig.json", FileMode.OpenOrCreate);
-                jsonSerializer.WriteObject(fileStream, CurrentAppState.CurrentAppConfig);
-                fileStream.Close();
+                try
+                {
+                    FileStream fileStream = new FileStream("AppConfig.json", FileMode.Truncate);
+                    jsonSerializer.WriteObject(fileStream, CurrentAppState.CurrentAppConfig);
+                    fileStream.Close();
+                } catch (System.IO.FileNotFoundException) {
+                    FileStream fileStream = new FileStream("AppConfig.json", FileMode.Create);
+                    jsonSerializer.WriteObject(fileStream, CurrentAppState.CurrentAppConfig);
+                    fileStream.Close();
+                };
+               
+
             };
 
             // Автоскролин TextBox'ов

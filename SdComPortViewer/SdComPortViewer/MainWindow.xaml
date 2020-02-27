@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SdComPortViewer"
         mc:Ignorable="d"
-        Title="Sverdlovsk dynamics com port viewer v 0.0.8" Height="852" Width="1599" MinWidth="498" MinHeight="500">
+        Title="Sverdlovsk dynamics com port viewer v 0.1.0" Height="852" Width="1599" MinWidth="498" MinHeight="500">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Color2}"/>

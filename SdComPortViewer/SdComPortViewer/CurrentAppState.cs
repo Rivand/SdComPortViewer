@@ -76,8 +76,6 @@ namespace SdComPortViewer
 
                 if (CurrentAppConfig.RightMenuIsCollapsed == true) mainWindow.HideRightMenu();
                 if (CurrentAppConfig.DownMenuIsCollapsed == true) mainWindow.HideDownMenu();
-
-
             }
             catch
             {
