@@ -24,10 +24,10 @@ namespace SdComPortViewer
         public UartSettingsWindow()
         {
             InitializeComponent();
-            textBox_baud_rate.Text = Uart.CurrentUartSettings.CurrentBaudRate.ToString();
-            comboBox_parity.Text = Uart.CurrentUartSettings.CurrentParity.ToString();
-            textBox_data_bits.Text = Uart.CurrentUartSettings.DataBits.ToString();
-            comboBox_stop_bits.Text = Uart.CurrentUartSettings.CurrentStopBits.ToString();
+            textBox_baud_rate.Text = Uart.currentUartSettings.CurrentBaudRate.ToString();
+            comboBox_parity.Text = Uart.currentUartSettings.CurrentParity.ToString();
+            textBox_data_bits.Text = Uart.currentUartSettings.DataBits.ToString();
+            comboBox_stop_bits.Text = Uart.currentUartSettings.CurrentStopBits.ToString();
         }
 
         private void button_uart_settings_cancel_Click(object sender, RoutedEventArgs e)
@@ -37,10 +37,10 @@ namespace SdComPortViewer
 
         private void button_uart_settings_ok_Click(object sender, RoutedEventArgs e)
         {
-            Uart.CurrentUartSettings.CurrentBaudRate = Convert.ToInt32(textBox_baud_rate.Text);
-            Uart.CurrentUartSettings.CurrentParity = (Parity)Enum.Parse(typeof(Parity), comboBox_parity.Text);
-            Uart.CurrentUartSettings.DataBits = Convert.ToInt32(textBox_data_bits.Text);
-            Uart.CurrentUartSettings.CurrentStopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBox_stop_bits.Text);
+            Uart.currentUartSettings.CurrentBaudRate = Convert.ToInt32(textBox_baud_rate.Text);
+            Uart.currentUartSettings.CurrentParity = (Parity)Enum.Parse(typeof(Parity), comboBox_parity.Text);
+            Uart.currentUartSettings.DataBits = Convert.ToInt32(textBox_data_bits.Text);
+            Uart.currentUartSettings.CurrentStopBits = (StopBits)Enum.Parse(typeof(StopBits), comboBox_stop_bits.Text);
             this.Close();
         }
     }

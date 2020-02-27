@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SdComPortViewer"
         mc:Ignorable="d"
-        Title="SdComPortViewer v 0.1.1" Height="852" Width="1599" MinWidth="498" MinHeight="500">
+        Title="SdComPortViewer v 0.1.2" Height="852" Width="1599" MinWidth="498" MinHeight="500">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Color2}"/>
