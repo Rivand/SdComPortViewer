@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SdComPortViewer"
         mc:Ignorable="d"
-        Title="Sverdlovsk dynamics com port viewer v 0.1.0" Height="852" Width="1599" MinWidth="498" MinHeight="500">
+        Title="SdComPortViewer v 0.1.1" Height="852" Width="1599" MinWidth="498" MinHeight="500">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource Color2}"/>
@@ -23,7 +23,7 @@
                 <DropShadowEffect/>
             </Button.Effect>
         </Button>
-        <GroupBox x:Name="groupBoxUart" Header="UART" Height="160" Margin="0,39,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+        <GroupBox x:Name="groupBoxUart" Header="UART" Height="143" Margin="0,39,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
             <GroupBox.Effect>
                 <DropShadowEffect/>
             </GroupBox.Effect>
@@ -32,15 +32,14 @@
             </GroupBox.Foreground>
             <Grid>
                 <Button x:Name="button_uart_settings" Content="Uart settings" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click"/>
-                <Button x:Name="button_rescan" Content="Rescan" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click_1"/>
-                <ComboBox x:Name="comboBox_uart_ports" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Width="87" SelectionChanged="comboBox_uart_ports_SelectionChanged"/>
-                <Button x:Name="button_listen" Content="Listen" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Width="87" Click="button_listen_Click"/>
-                <Button x:Name="button_stop_listen" Content="Stop listen" HorizontalAlignment="Left" Margin="10,112,0,0" VerticalAlignment="Top" Width="87" IsEnabled="False" Click="button_stop_listen_Click"/>
+                <ComboBox x:Name="comboBox_uart_ports" PreviewMouseLeftButtonDown="comboBox_uart_ports_PreviewMouseLeftButtonDown" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="87" SelectionChanged="comboBox_uart_ports_SelectionChanged"/>
+                <Button x:Name="button_listen" Content="Listen" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Width="87" Click="button_listen_Click"/>
+                <Button x:Name="button_stop_listen" Content="Stop listen" HorizontalAlignment="Left" Margin="10,87,0,0" VerticalAlignment="Top" Width="87" IsEnabled="False" Click="button_stop_listen_Click"/>
 
             </Grid>
         </GroupBox>
         <!---<GridSplitter HorizontalAlignment="Left" Height="100" Margin="1690,185,-134,0" VerticalAlignment="Top" Width="5"/> -->
-        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,204,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+        <GroupBox x:Name="groupBoxStyle" Header="Text and style" Height="263" Margin="0,187,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
             <GroupBox.Effect>
                 <DropShadowEffect Opacity="0.5"/>
             </GroupBox.Effect>
@@ -191,7 +190,7 @@
                 <SolidColorBrush Color="{DynamicResource Color5}"/>
             </Button.Background>
         </Button>
-        <GroupBox x:Name="groupBoxUart_DtrRts" Header="DTR and RTS" Height="88" Margin="0,472,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
+        <GroupBox x:Name="groupBoxUart_DtrRts" Header="DTR and RTS" Height="88" Margin="0,455,26,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="115" HorizontalContentAlignment="Right">
             <GroupBox.Effect>
                 <DropShadowEffect/>
             </GroupBox.Effect>

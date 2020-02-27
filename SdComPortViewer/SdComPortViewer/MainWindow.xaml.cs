@@ -214,7 +214,7 @@ namespace SdComPortViewer
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void comboBox_uart_ports_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             comboBox_uart_ports.Items.Clear();
             foreach (var c in System.IO.Ports.SerialPort.GetPortNames()) comboBox_uart_ports.Items.Add(c);
@@ -235,7 +235,6 @@ namespace SdComPortViewer
         private void button_listen_Click(object sender, RoutedEventArgs e)
         {
             comboBox_uart_ports.IsEnabled = false;
-            button_rescan.IsEnabled = false;
             button_stop_listen.IsEnabled = true;
             button_listen.IsEnabled = false;
             button_send_command.IsEnabled = true;
@@ -280,7 +279,6 @@ namespace SdComPortViewer
         private void button_stop_listen_Click(object sender, RoutedEventArgs e)
         {
             comboBox_uart_ports.IsEnabled = true;
-            button_rescan.IsEnabled = true;
             button_stop_listen.IsEnabled = false;
             button_listen.IsEnabled = true;
             button_send_command.IsEnabled = false;
