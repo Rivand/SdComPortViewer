@@ -18,6 +18,7 @@ using System.Threading;
 using System.IO.Ports;
 using System.Runtime.Serialization.Json;
 using Microsoft.Win32;
+using System.Data;
 
 namespace SdComPortViewer {
     /// <inheritdoc />
@@ -107,6 +108,7 @@ namespace SdComPortViewer {
 
         private readonly List<byte> _uartData = new List<byte>(); // Тут собираеться пакет с данными 
         private byte _lastByte = 0;
+        private bool need_timestamp = true;
         private void GetDataFromComPort(object sender, SerialDataReceivedEventArgs e) {
             try {
                 SerialPort sp = (SerialPort)sender;
@@ -115,7 +117,15 @@ namespace SdComPortViewer {
                 //listBox_COM.Invoke(new Action(() => listBox_COM.Items.Add(data)));
                 byte[] listenerData = Uart.Read();
                 string strMessage = "";
-                strMessage = listenerData.Aggregate("", (current, c) => current + (char)c);
+                //strMessage = listenerData.Aggregate("", (current, c) => current + (char)c);
+                for (int i = 0; i < listenerData.Length; i++) {
+                    if (need_timestamp) {
+                        strMessage += "[" + DateTime.Now.ToString() + "] ";
+                        need_timestamp = false;
+                    }
+                    strMessage += (char)listenerData[i];
+                    if (listenerData[i] == '\n') need_timestamp = true;
+                }
                 string hexMsg = "";
                 for (int i = 0; i < listenerData.Length; i++) {
                     _uartData.Add(listenerData[i]);
